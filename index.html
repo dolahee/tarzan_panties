@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타잔이 100만원 짜리 팬티 입는데 걸리는 시간은?</title>
+</head>
+<body>
+<style>
+body { font-family: 'Segoe UI', '맑은 고딕', sans-serif; background:#f7f7f7; padding:40px; color:#333; }
+
+#name, #pay { padding:10px 14px; margin:5px; border:1px solid #ccc; border-radius:6px; font-size:14px; }
+#startBtn { padding:10px 20px; border:none; border-radius:6px; background:#4CAF50; color:#fff; font-size:15px; cursor:pointer; transition:background 0.3s; }
+#startBtn:hover { background:#45a049; }
+
+.card { background:#fff; margin-top:20px; padding:20px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+.hidden { display:none; }
+
+.sing p { margin:6px 0; line-height:1.4; padding:8px 12px; border-bottom:1px dashed #ddd; }
+.sing p:last-child { border-bottom:none; }
+.sing { max-height:250px; overflow-y:auto; }
+
+.time { font-size:15px; font-weight:500; }
+.time div { margin:6px 0; padding:6px 10px; background:#f9f9f9; border-radius:6px; }
+.time span { font-weight:700; color:#2c7be5; }
+</style>
+
+
+<input id="name" placeholder="이름">
+<input id="pay" placeholder="목표 금액(원)">
+<button id="startBtn">Start</button>
+
+<div class="sing card hidden"></div>
+
+<div class="time card hidden">
+    노래 부르는데 걸린 총 시간 
+    <div><span class="sec"></span>초</div>
+    <div><span class="min"></span>분</div>
+    <div><span class="hour"></span>시간</div>
+    <div>총 <span class="day"></span>일일</div>
+</div>
+
+<script>
+    function startSinging()
+    {
+        const name = document.querySelector("#name").value;
+        const targetPay = parseInt(document.querySelector("#pay").value, 10);
+
+        const secondsPerRound = 7;
+        let i = 10;
+        let round = 0;
+
+        const singDiv = document.querySelector(".sing");
+        const timeDiv = document.querySelector(".time");
+
+        singDiv.innerHTML = ""; 
+
+        /* 처음 숨겨져 있던 div를 표시 */
+        singDiv.classList.remove("hidden");
+        timeDiv.classList.remove("hidden");
+
+        while (i <= targetPay)
+        {
+            const line = document.createElement("p");
+            line.textContent = `${name}이(가) ${i}원짜리 팬티를 입고, ${i + 10}원짜리 칼을 들고 노래를 한다. 아아아~`;
+            singDiv.appendChild(line);
+
+            i += 20;
+            round++;
+        }
+
+        /* 총 시간 계산 */
+        const totalSeconds = round * secondsPerRound;
+        document.querySelector(".time .sec").textContent = totalSeconds.toLocaleString();
+        document.querySelector(".time .min").textContent = (totalSeconds / 60).toFixed(2);
+        document.querySelector(".time .hour").textContent = (totalSeconds / 3600).toFixed(2);
+        document.querySelector(".time .day").textContent = (totalSeconds / 86400).toFixed(2);
+    }
+
+    document.querySelector("#startBtn").addEventListener("click", startSinging);
+</script>
+</body>
+</html>
