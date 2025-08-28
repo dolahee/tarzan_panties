@@ -54,8 +54,6 @@ body { font-family: 'Segoe UI', '맑은 고딕', sans-serif; background:#f7f7f7;
         const timeDiv = document.querySelector(".time");
 
         singDiv.innerHTML = ""; 
-
-        /* 처음 숨겨져 있던 div를 표시 */
         singDiv.classList.remove("hidden");
         timeDiv.classList.remove("hidden");
 
@@ -69,7 +67,6 @@ body { font-family: 'Segoe UI', '맑은 고딕', sans-serif; background:#f7f7f7;
             round++;
         }
 
-        /* 총 시간 계산 */
         const totalSeconds = round * secondsPerRound;
         document.querySelector(".time .sec").textContent = totalSeconds.toLocaleString();
         document.querySelector(".time .min").textContent = (totalSeconds / 60).toFixed(2);
@@ -80,4 +77,5 @@ body { font-family: 'Segoe UI', '맑은 고딕', sans-serif; background:#f7f7f7;
     document.querySelector("#startBtn").addEventListener("click", startSinging);
 </script>
 </body>
+
 </html>
